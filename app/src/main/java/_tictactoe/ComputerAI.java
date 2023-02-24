@@ -31,13 +31,19 @@ public class ComputerAI {
     }
 
 
+
+
+
+
+
+
     public int[][] availableMoves(){
         int count = 0;
         int[][] currStateCopy = new int[9][2];
 
         for(int row = 0; row < 3; row++){
             for(int col = 0; col < 3; col++){
-                if(game.getValue(row, col).equals(game.emptyField)){
+                if(game.getValue(row, col)==(game.empty)){
                     currStateCopy[count][0] = row;
                     currStateCopy[count++][1] = col;
                 }
@@ -45,6 +51,8 @@ public class ComputerAI {
         }
         return Arrays.copyOf(currStateCopy, count);
     }
+
+
 
     public int[] computerMove(){
         int min = 0;

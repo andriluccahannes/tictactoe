@@ -18,7 +18,7 @@ public class App {
         game.printGame();
 
         //loop through game till someone has won the game
-        while(game.checkStatus()==null){
+        while(game.checkStatus()==-1){
 
             Scanner scanner = new Scanner(System.in);
 
@@ -51,7 +51,7 @@ public class App {
         scanner.close();
 
         //check if user has won
-        if(game.checkStatus()!=null){
+        if(game.checkStatus()!=-1){
             game.printGame();
             System.out.println("Congratiolation you won the Game");
             break;
@@ -70,7 +70,7 @@ public class App {
         game.setValue(computerMove[0], computerMove[1], Players.PLAYERTWO);
 
         //check if the computer won the game
-       if(game.checkStatus()!=null){
+       if(game.checkStatus()!=-1){
             game.printGame();
             System.out.println("I'm sorry, but the Computer won this time!");
             break;

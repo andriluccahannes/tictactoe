@@ -9,14 +9,18 @@ import java.util.Arrays;
  */
 public class Game {
     
-    String[][] currState = new String[3][3];
+    int[][] currState = new int[3][3];
 
     final String emptyField = "⬛";
 
+    final int empty = 0;
+
+    
+
     
     public Game(){
-        for(String row[]: currState){
-            Arrays.fill(row, emptyField);
+        for(int row[]: currState){
+            Arrays.fill(row, empty);
         }
     }
 
@@ -32,12 +36,18 @@ public class Game {
             for(int col = 0; col < currState[row].length; col++){
 
                 System.out.print("[" + currState[row][col] + "]");
+
+                switch(currState[row][col]){
+                    case 1: System.out.print("[" + Players.PLAYERONE.playerSymbol + "]");break;
+                    case 2: System.out.print("[" + Players.PLAYERTWO.playerSymbol + "]");break;
+                    case 3: System.out.print("[" + Players.COMPUTERAI.playerSymbol + "]");break;
+                }
             }
             System.out.println();
         }
     }
     
-    public String checkStatus(){
+    public int checkStatus(){
         
         for(int i = 0; i < 3; i++){
             if(compareCol(i)){
@@ -54,7 +64,7 @@ public class Game {
         }else if(compareSecondDiagonal()){
             return currState[0][2];
         }
-        return null;
+        return -1;
     }
 
     /**
@@ -65,7 +75,7 @@ public class Game {
      * @param player the Player that is updating the field
      */
     public void setValue(int row, int col, Players player){
-        currState[row][col] = player.playerSymbol;
+        currState[row][col] = player.playerValue;
     }
     
     /**
@@ -74,14 +84,14 @@ public class Game {
      * @param col
      * @return Returns the String that is set in a field.
      */
-    public String getValue(int row, int col){
+    public int getValue(int row, int col){
         return currState[row][col];
     }
 
     private boolean compareCol(int col){
-        if(currState[0][col].equals(currState[1][col]) && 
-        currState[0][col].equals(currState[2][col]) && 
-        !currState[0][col].equals(emptyField)){
+        if(currState[0][col]==(currState[1][col]) && 
+        currState[0][col]==(currState[2][col]) && 
+        currState[0][col]!=(empty)){
 
             return true;        
         }
@@ -89,9 +99,9 @@ public class Game {
     }
 
     private boolean compareRow(int row){
-        if(currState[row][0].equals(currState[row][1]) && 
-        currState[row][0].equals(currState[row][2]) && 
-        !currState[row][0].equals(emptyField)){
+        if(currState[row][0]==(currState[row][1]) && 
+        currState[row][0]==(currState[row][2]) && 
+        currState[row][0]!=(empty)){
 
             return true;        
         }
@@ -99,9 +109,9 @@ public class Game {
     }
 
     private boolean compareFirstDiagonal(){
-        if(currState[0][0].equals(currState[1][1]) && 
-        currState[0][0].equals(currState[2][2]) && 
-        !currState[0][0].equals(emptyField)){
+        if(currState[0][0]==(currState[1][1]) && 
+        currState[0][0]==(currState[2][2]) && 
+        currState[0][0]!=(empty)){
 
             return true;        
         }
@@ -110,7 +120,7 @@ public class Game {
 
 
     private boolean compareSecondDiagonal(){
-        if(currState[0][2].equals(currState[1][1]) && currState[0][2].equals(currState[2][0])&& !currState[0][2].equals(emptyField)){
+        if(currState[0][2]==(currState[1][1]) && currState[0][2]==(currState[2][0])&& currState[0][2]!=(empty)){
             return true;        
         }
         return false;
@@ -125,6 +135,6 @@ public class Game {
      * @return Returns true of move is legal and false if move is not legal
      */
     public boolean checkLegalMove(int row, int col){
-        return getValue(row, col).equals(emptyField);
+        return getValue(row, col)==(empty);
     }
 }
